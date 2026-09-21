@@ -1,0 +1,93 @@
+// Version: 4.0.0
+type AccessControlState__201339279 =
+  {
+    var adminAssigned : Bool;
+    userRoles : Map__230067015<Principal, UserRole__91647283>
+  };
+type AttendanceId__587626980 = Nat;
+type AttendanceId__91187254 = Nat;
+type AttendanceRecord__195413474 =
+  {
+    date : DateKey__1001879717;
+    id : AttendanceId__587626980;
+    owner : Principal;
+    status : AttendanceStatus__911735507;
+    subjectId : SubjectId__839938110;
+    updatedAt : Int
+  };
+type AttendanceRecord__699091857 =
+  {
+    date : DateKey__856556366;
+    id : AttendanceId__91187254;
+    owner : Principal;
+    status : AttendanceStatus__1021638340;
+    subjectId : SubjectId__402408784;
+    updatedAt : Int
+  };
+type AttendanceStatus__1021638340 = {#absent; #classCancelled; #present};
+type AttendanceStatus__911735507 = {#absent; #classCancelled; #present};
+type ColourHex__1026506477 = Text;
+type ColourHex__175710378 = Text;
+type Data__44217153<K, V> = {var count : Nat__227979830; kvs : [var ?(K, V)]};
+type DateKey__1001879717 = Text;
+type DateKey__856556366 = Text;
+type Internal__283199666<K, V> =
+  {children : [var ?Node__204828119<K, V>]; data : Data__44217153<K, V>};
+type Leaf__598469445<K, V> = {data : Data__44217153<K, V>};
+type Map__230067015<K, V> = Map__405889023<K, V>;
+type Map__405889023<K, V> = Map__603270868<K, V>;
+type Map__603270868<K, V> =
+  {var root : Node__204828119<K, V>; var size : Nat__227979830};
+type Nat__227979830 = Nat__920180692;
+type Nat__920180692 = Nat;
+type NewActor__193197324 =
+  {
+    accessControlState : AccessControlState__201339279;
+    attendance :
+      Map__230067015<AttendanceId__587626980, AttendanceRecord__195413474>;
+    state : {var nextAttendanceId : Nat; var nextSubjectId : Nat};
+    subjects : Map__230067015<SubjectId__839938110, Subject__140527576>
+  };
+type Node__204828119<K, V> =
+  {#internal : Internal__283199666<K, V>; #leaf : Leaf__598469445<K, V>};
+type SubjectId__402408784 = Nat;
+type SubjectId__839938110 = Nat;
+type Subject__140527576 =
+  {
+    colour : ColourHex__175710378;
+    createdAt : Int;
+    id : SubjectId__839938110;
+    name : Text;
+    owner : Principal
+  };
+type Subject__69355533 =
+  {
+    colour : ColourHex__1026506477;
+    createdAt : Int;
+    id : SubjectId__402408784;
+    name : Text;
+    owner : Principal
+  };
+type UserRole__91647283 = {#admin; #guest; #user};
+{
+  "20260921_120000" : (_old : {}) -> NewActor__193197324
+}
+actor  {
+  stable accessControlState :
+    {
+      var adminAssigned : Bool;
+      userRoles : Map__230067015<Principal, UserRole__91647283>
+    };
+  stable attendance :
+    {
+      var root :
+        Node__204828119<AttendanceId__91187254, AttendanceRecord__699091857>;
+      var size : Nat__227979830
+    };
+  stable state : {var nextAttendanceId : Nat; var nextSubjectId : Nat};
+  stable subjects :
+    {
+      var root : Node__204828119<SubjectId__402408784, Subject__69355533>;
+      var size : Nat__227979830
+    }
+};

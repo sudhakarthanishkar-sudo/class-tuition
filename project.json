@@ -1,0 +1,21 @@
+{
+  "overview": "A tuition class attendance tracker with colour-coded subjects, daily Present/Absent/Cancelled marking, and a calendar for backfilling past classes.",
+  "features": [
+    "Sign in securely with Internet Identity",
+    "Add subjects and pick a colour for each tab",
+    "Swipe a subject right to delete it",
+    "Mark today's attendance as Present, Absent or Class Cancelled",
+    "Use a small calendar to add past class dates",
+    "Change a status already recorded on any date",
+    "Swipe a recorded date right to delete it",
+    "Everything saves automatically and survives refresh"
+  ],
+  "category": "productivity",
+  "tags": [
+    "attendance",
+    "education",
+    "tracker",
+    "tuition"
+  ],
+  "last_updated": "2026-09-21T06:25:50.598Z"
+}

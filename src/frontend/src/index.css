@@ -1,0 +1,266 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@font-face {
+  font-family: "Nunito";
+  src: url("/assets/fonts/Nunito.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 200 1000;
+}
+
+@font-face {
+  font-family: "Figtree";
+  src: url("/assets/fonts/Figtree.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 300 900;
+}
+
+@font-face {
+  font-family: "Geist Mono";
+  src: url("/assets/fonts/GeistMono.woff2") format("woff2");
+  font-display: swap;
+  font-weight: 100 900;
+}
+
+@layer base {
+  :root {
+    --font-display: "Nunito", "Figtree", sans-serif;
+    --font-body: "Figtree", "Nunito", sans-serif;
+    --font-mono: "Geist Mono", monospace;
+
+    --radius: 1rem;
+    --radius-card: 1.375rem;
+    --radius-pill: 999px;
+
+    /* Peach paper canvas */
+    --background: 0.955 0.026 62;
+    --foreground: 0.235 0.042 40;
+
+    /* Warm off-white paper surfaces */
+    --card: 0.992 0.008 78;
+    --card-foreground: 0.235 0.042 40;
+    --popover: 0.996 0.006 78;
+    --popover-foreground: 0.235 0.042 40;
+
+    /* Deep plum ink — the primary action colour */
+    --primary: 0.405 0.155 330;
+    --primary-foreground: 0.985 0.01 330;
+
+    --secondary: 0.925 0.026 62;
+    --secondary-foreground: 0.3 0.045 40;
+
+    --muted: 0.928 0.022 62;
+    --muted-foreground: 0.555 0.035 45;
+
+    /* Apricot accent — highlights, active tab underline, today marker */
+    --accent: 0.68 0.185 50;
+    --accent-foreground: 0.2 0.04 40;
+
+    /* Status: Present */
+    --success: 0.62 0.15 155;
+    --success-foreground: 0.99 0.01 155;
+
+    /* Status: Absent */
+    --destructive: 0.545 0.215 25;
+    --destructive-foreground: 0.985 0.008 25;
+
+    /* Status: Class Cancelled */
+    --warning: 0.775 0.14 85;
+    --warning-foreground: 0.24 0.05 70;
+
+    --border: 0.885 0.028 62;
+    --input: 0.885 0.028 62;
+    --ring: 0.405 0.155 330;
+
+    --chart-1: 0.68 0.185 50;
+    --chart-2: 0.62 0.15 155;
+    --chart-3: 0.405 0.155 330;
+    --chart-4: 0.775 0.14 85;
+    --chart-5: 0.545 0.215 25;
+
+    --sidebar: 0.975 0.018 62;
+    --sidebar-foreground: 0.235 0.042 40;
+    --sidebar-primary: 0.405 0.155 330;
+    --sidebar-primary-foreground: 0.985 0.01 330;
+    --sidebar-accent: 0.925 0.026 62;
+    --sidebar-accent-foreground: 0.3 0.045 40;
+    --sidebar-border: 0.885 0.028 62;
+    --sidebar-ring: 0.405 0.155 330;
+
+    /* Depth & motion tokens */
+    --shadow-subtle: 0 1px 2px 0 oklch(0.35 0.05 50 / 0.06);
+    --shadow-elevated: 0 10px 30px -12px oklch(0.35 0.06 45 / 0.22);
+    --shadow-float: 0 14px 34px -10px oklch(0.405 0.155 330 / 0.38);
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.44 0.16 332) 0%,
+      oklch(0.37 0.14 322) 100%
+    );
+    --gradient-peach: linear-gradient(
+      180deg,
+      oklch(0.972 0.03 68) 0%,
+      oklch(0.945 0.028 58) 100%
+    );
+    --transition-smooth: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .dark {
+    --background: 0.185 0.022 45;
+    --foreground: 0.945 0.012 62;
+
+    --card: 0.235 0.026 45;
+    --card-foreground: 0.945 0.012 62;
+    --popover: 0.235 0.026 45;
+    --popover-foreground: 0.945 0.012 62;
+
+    --primary: 0.78 0.13 330;
+    --primary-foreground: 0.185 0.03 330;
+
+    --secondary: 0.28 0.028 45;
+    --secondary-foreground: 0.88 0.012 62;
+
+    --muted: 0.28 0.028 45;
+    --muted-foreground: 0.66 0.022 55;
+
+    --accent: 0.76 0.155 58;
+    --accent-foreground: 0.185 0.03 58;
+
+    --success: 0.7 0.14 155;
+    --success-foreground: 0.185 0.03 155;
+
+    --destructive: 0.63 0.19 25;
+    --destructive-foreground: 0.96 0.01 25;
+
+    --warning: 0.8 0.13 85;
+    --warning-foreground: 0.2 0.04 70;
+
+    --border: 0.31 0.028 45;
+    --input: 0.31 0.028 45;
+    --ring: 0.78 0.13 330;
+
+    --chart-1: 0.76 0.155 58;
+    --chart-2: 0.7 0.14 155;
+    --chart-3: 0.78 0.13 330;
+    --chart-4: 0.8 0.13 85;
+    --chart-5: 0.63 0.19 25;
+
+    --sidebar: 0.235 0.026 45;
+    --sidebar-foreground: 0.945 0.012 62;
+    --sidebar-primary: 0.78 0.13 330;
+    --sidebar-primary-foreground: 0.185 0.03 330;
+    --sidebar-accent: 0.28 0.028 45;
+    --sidebar-accent-foreground: 0.88 0.012 62;
+    --sidebar-border: 0.31 0.028 45;
+    --sidebar-ring: 0.78 0.13 330;
+
+    --shadow-subtle: 0 1px 2px 0 oklch(0.1 0.02 45 / 0.4);
+    --shadow-elevated: 0 10px 30px -12px oklch(0.08 0.02 45 / 0.6);
+    --shadow-float: 0 14px 34px -10px oklch(0.78 0.13 330 / 0.35);
+    --gradient-primary: linear-gradient(
+      135deg,
+      oklch(0.8 0.13 332) 0%,
+      oklch(0.72 0.12 322) 100%
+    );
+    --gradient-peach: linear-gradient(
+      180deg,
+      oklch(0.215 0.026 50) 0%,
+      oklch(0.19 0.024 42) 100%
+    );
+  }
+
+  * {
+    @apply border-border;
+  }
+  body {
+    @apply bg-background text-foreground font-body antialiased;
+  }
+  h1,
+  h2,
+  h3 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .transition-smooth {
+    transition: var(--transition-smooth);
+  }
+
+  .bg-gradient-primary {
+    background-image: var(--gradient-primary);
+  }
+
+  .bg-gradient-peach {
+    background-image: var(--gradient-peach);
+  }
+
+  .shadow-subtle {
+    box-shadow: var(--shadow-subtle);
+  }
+
+  .shadow-elevated {
+    box-shadow: var(--shadow-elevated);
+  }
+
+  .shadow-float {
+    box-shadow: var(--shadow-float);
+  }
+
+  /* Rounded roundedness for the friendly, tactile tone */
+  .radius-card {
+    border-radius: var(--radius-card);
+  }
+
+  /* Status chip colours — Present / Absent / Cancelled */
+  .chip-present {
+    background-color: oklch(var(--success) / 0.16);
+    color: oklch(var(--success));
+  }
+
+  .chip-absent {
+    background-color: oklch(var(--destructive) / 0.14);
+    color: oklch(var(--destructive));
+  }
+
+  .chip-cancelled {
+    background-color: oklch(var(--warning) / 0.2);
+    color: oklch(var(--warning-foreground));
+  }
+
+  /* Swipe-right delete reveal track */
+  .swipe-track {
+    background-color: oklch(var(--destructive));
+    color: oklch(var(--destructive-foreground));
+  }
+
+  .animate-rise {
+    animation: rise 0.32s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+
+  .animate-sheet-in {
+    animation: sheet-in 0.28s cubic-bezier(0.22, 1, 0.36, 1) both;
+  }
+}
+
+@keyframes rise {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes sheet-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0) scale(1);
+  }
+}

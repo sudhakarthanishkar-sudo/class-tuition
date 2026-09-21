@@ -1,0 +1,123 @@
+type Value = 
+ variant {
+   "bool": bool;
+   float: float64;
+   "int": int;
+   "nat": nat;
+   "null";
+   "text": text;
+ };
+type UserRole = 
+ variant {
+   admin;
+   guest;
+   user;
+ };
+type SubjectView = 
+ record {
+   colour: ColourHex;
+   createdAt: int;
+   id: SubjectId;
+   name: text;
+ };
+type SubjectId = nat;
+type SubjectError = 
+ variant {
+   invalidColour;
+   invalidName;
+   notAuthorized;
+   notFound: SubjectId;
+ };
+type Result__1 = 
+ record {
+   hasMore: bool;
+   rows: vec vec Cell;
+ };
+type Result_1 = 
+ variant {
+   err: Error;
+   ok;
+ };
+type Result = 
+ variant {
+   err: AttendanceError;
+   ok: AttendanceView;
+ };
+type Error = 
+ variant {
+   AmbiguousAttribute: record {
+                         field: text;
+                         sources: vec text;
+                       };
+   FrontendOriginMismatch: record {
+                             expected: vec text;
+                             got: text;
+                           };
+   FrontendOriginsNotConfigured;
+   MalformedCandid;
+   MissingField: text;
+   MixedSsoSources: record {
+                      otherKeys: vec text;
+                      ssoKeys: vec text;
+                    };
+   NoAttributes;
+   Stale: record {ageNs: nat;};
+   UnknownNonce;
+   UntrustedSsoSource: record {domain: text;};
+ };
+type DateKey = text;
+type ColourHex = text;
+type Cell = 
+ record {
+   name: text;
+   value: Value;
+ };
+type AttendanceView = 
+ record {
+   date: DateKey;
+   id: AttendanceId;
+   status: AttendanceStatus;
+   subjectId: SubjectId;
+   updatedAt: int;
+ };
+type AttendanceStatus = 
+ variant {
+   absent;
+   classCancelled;
+   present;
+ };
+type AttendanceId = nat;
+type AttendanceError = 
+ variant {
+   invalidDate;
+   notAuthorized;
+   notFound: AttendanceId;
+   subjectNotFound: SubjectId;
+ };
+service : {
+  _initialize_access_control: () -> ();
+  _internet_identity_sign_in_finish: () -> (Result_1);
+  _internet_identity_sign_in_start: () -> (blob);
+  assignCallerUserRole: (user: principal, role: UserRole) -> ();
+  /// Create a subject owned by the signed-in caller.
+  createSubject: (name: text, colour: ColourHex) -> (SubjectView);
+  /// Delete one of the signed-in caller's attendance records.
+  deleteAttendance: (id: AttendanceId) -> (opt AttendanceError);
+  /// Delete one of the signed-in caller's subjects.
+  deleteSubject: (id: SubjectId) -> (opt SubjectError);
+  /// Delete a subject and every attendance record that belongs to it.
+  deleteSubjectWithAttendance: (id: SubjectId) -> (opt SubjectError);
+  execute: (qJson: text) -> (Result__1) query;
+  /// Static Markdown description of this canister's public API.
+  getApiDoc: () -> (text) query;
+  getCallerUserRole: () -> (UserRole) query;
+  isCallerAdmin: () -> (bool) query;
+  /// List the signed-in caller's attendance records for a subject.
+  listAttendance: (subjectId: SubjectId) -> (vec AttendanceView) query;
+  /// List the signed-in caller's subjects.
+  listSubjects: () -> (vec SubjectView) query;
+  /// Record or update attendance for one of the signed-in caller's subjects.
+  recordAttendance: (subjectId: SubjectId, date: DateKey, status:
+   AttendanceStatus) -> (Result);
+  schema: () -> (text) query;
+}
